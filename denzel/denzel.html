@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: url('bb.gif') center/cover no-repeat fixed;
+      /* Background with bb.gif, covering the whole screen */
+      overflow: hidden;
+    }
+
+    #container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+      /* Add a shadow to the container */
+    }
+
+    #gif {
+      width: 100%;
+      /* 100% width for a better viewing experience */
+      max-width: 600px;
+      /* Increased maximum width for larger screens */
+      max-height: 600px;
+      /* 100% height for a better viewing experience */
+      margin-bottom: 20px;
+      /* Spacing between gif and buttons */
+      filter: blur(0);
+      /* Reset blur */
+      transition: filter 0.5s ease-in-out;
+    }
+
+    #choices {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    #yes,
+    #no,
+    #back {
+      padding: 10px 20px;
+      font-size: 1.5em;
+      /* Increased font size for better readability */
+      cursor: pointer;
+      background-color: #ffb2dd;
+      /* Lighter pink button background */
+      border: none;
+      color: #fff;
+      /* White text color */
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      /* Smooth transition on hover */
+    }
+
+    #yes:hover,
+    #no:hover,
+    #back:hover {
+      background-color: #ff8cc6;
+      /* Lighter pink on hover */
+      transform: scale(1.1);
+      /* Scale up on hover */
+    }
+
+    #letter {
+      display: none;
+      margin-top: 20px;
+      filter: blur(0);
+      transition: filter 1s ease-in-out;
+      color: #fff;
+      /* White text color for better readability */
+    }
+
+    #heheImageContainer {
+      position: relative;
+      width: 80vmin;
+      /* Square size based on viewport size */
+      max-width: 600px;
+      /* Increased maximum width for larger screens */
+      max-height: 600px;
+      /* 100% height for a better viewing experience */
+      margin-bottom: 40px;
+      /* Spacing between image and buttons */
+      overflow: hidden;
+    }
+
+    #heheImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.5s ease-in-out;
+      border-radius: 20px;
+      /* Softening the edges */
+      position: relative;
+    }
+
+    #heheImage:hover {
+      filter: brightness(120%);
+      /* Increase brightness on hover */
+      transform: rotate(5deg);
+      /* Rotate on hover */
+    }
+
+    #zoomedText {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5em;
+      /* Increased font size for better readability */
+      color: white;
+    }
+
+    #additionalText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5em;
+      /* Increased font size for better readability */
+      color: white;
+      display: none;
+    }
+
+    #randomImage {
+      position: absolute;
+      top: 150%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5em;
+      /* Increased font size for better readability */
+      color: black;
+    }
+
+    #ngiImage {
+      width: 100vw;
+      /* 100% of viewport width */
+      height: 100vh;
+      /* 100% of viewport height */
+      object-fit: cover;
+      /* Ensure the image covers the entire container */
+    }
+
+    #loveLetter {
+      margin-top: 10px;
+      font-size: 1.5em;
+      /* Increased font size for better readability */
+      color: #ff80ab;
+      /* Darker pink text color */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container">
+    <img id="gif" src="cat.gif" alt="Background" />
+    <div id="choices">
+      <button id="yes" onclick="showLetter('yes')">Yes</button>
+      <button id="no" onclick="showLetter('no')">No</button>
+    </div>
+    <p id="randomText" style="display:none;">Random Text</p>
+    <p id="loveLetterOutsideDen" style="display:none;">🌟 Happy 23rd Monthsary, gha q! 🌟 Iloveyousomuch thankyouu kasi lagi ka nanjan HAHAAAHA🥰
+      kahit nakakairita ka mahal padin kita sheesh alam mo 3 hrs ko ng ginagawa to pagod na ako mag code huhu kanina pa ako search ng search dito kasi
+      may mga di ako alam and sobrang hirap pero naisip ko minsan lg naman ako gumawa neto para sayo tyaka di na ako nakakapag ganto sayo kasi nga busy
+      ako sa paglalaro. I just want you to know na mahal na mahal kita palagi kahit lagi kita inaaway gha wala na ako masabi sa true lg kasi alam mo naman
+      na to and if sasabihin ko pa parang paulit ulit namana HAHAHHAHAHAHA basta mahal kita lage mag ingat ka jan and alagaan mo sarili mo tigil mo nadin
+      pag ddroga mo ha ? masama yan Happy Monthsary ulit palangga koooooo mahal na mahal kita to the moon and back SAHAHASHHAHAHASH mwaps!!!</p>
+    <div id="letter">
+      <p id="loveLetter"></p>
+      <p id="loveContent">
+      </p>
+    </div>
+    <div id="heheImageContainer" style="display:none;">
+      <img id="heheImage" src="hehe.jpg" alt="Hehe Image" onclick="zoomHehe()">
+      <p id="zoomedText"></p>
+      <p id="additionalText"></p>
+      <p id="randomImage"></p>
+    </div>
+    <img id="ngiImage" src="ngi.jpg" alt="Ngi Image" style="display:none;">
+    <button id="back" style="display:none;" onclick="showBackButton()">Go Back</button>
+  </div>
+
+  <script>
+    let yesButton = document.getElementById('yes');
+    let noButton = document.getElementById('no');
+    let backButton = document.getElementById('back');
+    let letterDiv = document.getElementById('letter');
+    let heheImageContainer = document.getElementById('heheImageContainer');
+    let ngiImage = document.getElementById('ngiImage');
+    let loveLetter = document.getElementById('loveLetter');
+    let loveContent = document.getElementById('loveContent');
+    let gifImage = document.getElementById('gif');
+    let heheImage = document.getElementById('heheImage');
+    let zoomedText = document.getElementById('zoomedText');
+    let additionalText = document.getElementById('additionalText');
+    let randomImage = document.getElementById('randomImage');
+    let loveLetterOutsideDen = document.getElementById('loveLetterOutsideDen');
+
+    function showLetter(choice) {
+      document.getElementById('choices').style.display = 'none';
+
+      if (choice === 'yes') {
+        gifImage.style.display = 'none';
+        heheImageContainer.style.display = 'block';
+        ngiImage.style.display = 'none';
+        backButton.style.display = 'none';
+
+        heheImage.src = 'hehe.jpg';
+        zoomedText.innerText = 'Click here bebe';
+        additionalText.innerText = '';
+        randomImage.innerText = 'Random Image';
+        loveLetterOutsideDen.style.display = 'none';
+
+        heheImage.onclick = function () {
+          heheImage.src = 'den.gif';
+          zoomedText.innerText = '';
+          additionalText.innerText = '';
+          randomImage.innerText = 'Random Image';
+          heheImageContainer.style.transform = 'scale(0.8)';
+          loveLetterOutsideDen.style.display = 'block';
+        };
+      } else {
+        letterDiv.innerHTML = '<p>Bat NO di mo naba ako mahal? :(</p>';
+        letterDiv.style.display = 'block';
+        backButton.style.display = 'block';
+      }
+    }
+
+    function showBackButton() {
+      letterDiv.style.display = 'none';
+      heheImageContainer.style.display = 'none';
+      ngiImage.style.display = 'none';
+      backButton.style.display = 'none';
+
+      gifImage.style.display = 'block';
+
+      const question1 = prompt('When is our monthsary?');
+      const question2 = prompt('How did we meet?');
+      const question3 = prompt('Do you love me? (yes/no)');
+
+      if (
+        question1.toLowerCase() === 'november 30' &&
+        question2.toLowerCase() === 'omegle' &&
+        question3.toLowerCase() === 'yes'
+      ) {
+        document.getElementById('choices').style.display = 'flex';
+      } else {
+        letterDiv.innerHTML = '<img src="ngi.jpg" alt="Incorrect Answers" style="width: 150vw; height: 150vh; object-fit: cover;">';
+        letterDiv.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+
+</html>
